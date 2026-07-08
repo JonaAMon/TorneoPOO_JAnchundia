@@ -2,13 +2,18 @@
 
 Jugador objJugador1 = new Jugador("Piero Hincapié", 24, 4, "Defensa");
 
-Jugador objJugador2 = new Jugador("Enner Valencia", 32, 300, "Delantero");
+Jugador objJugador2 = new Jugador("Enner Valencia", 32, 90, "Delantero");
 
 Equipo objEquipo1 = new Equipo("Emelec", "Guayaquil");
 
-objEquipo1.AgregarJugador(objJugador1);
-objEquipo1.AgregarJugador(objJugador2);
 
+Jugador objJugador5 = new Jugador("Piero Hincapié", 24, 4, "Defensa");
+objEquipo1.AgregarJugador(objJugador1);
+// Jugador nulo 
+Jugador objJugadorNulo = null;
+     objEquipo1.AgregarJugador(objJugadorNulo);
+
+        
 
 
 objEquipo1.ListarPlantilla();

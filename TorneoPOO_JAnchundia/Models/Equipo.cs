@@ -20,6 +20,12 @@ namespace TorneoPOO_JAnchundia.Models
 
         public void AgregarJugador(Jugador objJugador)
         {
+            if (objJugador == null)
+            {
+                Console.WriteLine("No se puede agregar un jugador nulo.");
+                return;
+            }
+
             this.Jugadores.Add(objJugador);
             Console.WriteLine($"Jugador {objJugador.Nombre} agregado correctamente");
         }
