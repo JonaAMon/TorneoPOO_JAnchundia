@@ -62,6 +62,18 @@ namespace TorneoPOO_JAnchundia.Models
                 return false;
             }
         }
+        public void CambiarNumeroCamiseta(int nuevoNumero)
+        {
+            if (nuevoNumero <= 0 || nuevoNumero > 99)
+            {
+                Console.WriteLine($"Número inválido: {nuevoNumero}. Debe estar entre 1 y 99.");
+                return;
+            }
+
+            this.Numero = nuevoNumero;
+            Console.WriteLine($"{Nombre} ahora tiene la camiseta número {nuevoNumero}");
+        }
+
 
     }
 }
