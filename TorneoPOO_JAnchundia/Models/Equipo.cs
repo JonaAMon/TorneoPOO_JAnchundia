@@ -38,5 +38,24 @@ namespace TorneoPOO_JAnchundia.Models
                 objJugador.Presentar();
             }
         }
+        public void ContarJugadores()
+        {
+            Console.WriteLine($"El equipo {Nombre} tiene {Jugadores.Count} jugadores.");
+        }
+
+        public Jugador BuscarJugadorPorNumero(int numero)
+        {
+            foreach (Jugador j in Jugadores)
+            {
+                if (j.Numero == numero)
+                {
+                    Console.WriteLine($"Jugador encontrado: {j.Nombre}");
+                    return j;
+                }
+            }
+            Console.WriteLine("No se encontró jugador con ese número.");
+            return null;
+        }
+
     }
 }

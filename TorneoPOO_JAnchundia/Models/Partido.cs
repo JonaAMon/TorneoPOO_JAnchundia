@@ -32,10 +32,25 @@ namespace TorneoPOO_JAnchundia.Models
 
         public void MostrarResumen()
         {
-            Console.WriteLine($"Hay un partido programado entre el local {this.Local.Nombre} y el visitante {this.Visitante.Nombre} en el lugar {this.Lugar}");
+            Console.WriteLine($"Hay un partido programado entre el local {this.Local.Nombre} y el visitante {this.Visitante.Nombre} en el lugar {this.Lugar} el día {this.Fecha.ToShortDateString()}");
         }
 
+        public void CambiarLugar(string nuevoLugar)
+        {
+            this.Lugar = nuevoLugar;
+            Console.WriteLine($"El partido ahora se jugará en {nuevoLugar}");
+        }
 
+        public void PosponerPartido(DateTime nuevaFecha)
+        {
+            if (nuevaFecha < DateTime.Now)
+            {
+                Console.WriteLine("No se puede reprogramar el partido a una fecha pasada.");
+                return;
+            }
 
+            this.Fecha = nuevaFecha;
+            Console.WriteLine($"El partido fue reprogramado para {Fecha.ToShortDateString()}");
+        }
     }
 }
