@@ -14,6 +14,16 @@ namespace TorneoPOO_JAnchundia.Models
 
         public Partido(Equipo local, Equipo visitante, DateTime fecha, string lugar)
         {
+            if (local == null || visitante == null)
+            {
+                throw new ArgumentException("Los equipos no pueden ser nulos.");
+            }
+
+            if (local.Nombre == visitante.Nombre)
+            {
+                throw new ArgumentException("El equipo local y visitante deben ser distintos.");
+            }
+            
             this.Local = local;
             this.Visitante = visitante;
             this.Fecha = fecha;
