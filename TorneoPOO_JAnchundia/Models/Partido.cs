@@ -107,11 +107,9 @@ namespace TorneoPOO_JAnchundia.Models
 
 
         public void MostrarResumen()
-            
         {
-            Console.WriteLine($"Hay un partido programado entre el local {this.Local.Nombre} y el visitante {this.Visitante.Nombre} en el lugar {this.Lugar} el día {this.Fecha.ToShortDateString()}");
+            Console.WriteLine($"Hay un partido [{this.Estado}] entre el local {this.Local.Nombre} y el visitante {this.Visitante.Nombre} en el lugar {this.Lugar} el día {this.Fecha.ToShortDateString()}. Duración: {this.DuracionMinutos} min | Asistencia: {this.AsistenciaEspectadores:N0} personas.");
         }
-        
         public void CambiarLugar(string nuevoLugar)
         {
             this.Lugar = nuevoLugar;

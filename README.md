@@ -13,4 +13,10 @@ Comportamientos de las clases
 2026-07-08
 	Se crearon 3 métodos en clase jugador y partido
 	Se hicieron 2 validaciones 
-	
+
+2026-07-14
+	Creación de propiedades
+	Modificadores de acceso
+	Validaciones de propiedades
+	Se añadieron 3 atributos a cada clase
+	A cada una se añadió las propiedades, se las consideró dentro del constructor y se añadió validaciones pertinentes

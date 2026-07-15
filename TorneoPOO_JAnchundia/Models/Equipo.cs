@@ -96,7 +96,7 @@ namespace TorneoPOO_JAnchundia.Models
 
         public void ListarPlantilla()
         {
-            Console.WriteLine($"La lista de jugadores del equipo {this.Nombre} de la ciudad de {this.Ciudad} es:");
+            Console.WriteLine($"\nLa lista de jugadores del equipo {this.Nombre} (Ciudad: {this.Ciudad} | DT: {this.DirectorTecnico} | Estadio: {this.Estadio} | Puntos: {this.Puntos}) es:");
             foreach (Jugador objJugador in Jugadores)
             {
                 objJugador.Presentar();

@@ -119,7 +119,8 @@ namespace TorneoPOO_JAnchundia.Models
         //METODOS, COMPORTAMIENTOS O FUNCIONES
         public void Presentar()
         {
-            Console.WriteLine($"Hola soy {this.Nombre} tengo {this.Edad} años y mi número es el {this.Numero}");
+            string titularidad = this.EsTitular ? "Titular" : "Suplente";
+            Console.WriteLine($"Hola, soy {this.Nombre} ({this.Nacionalidad}), tengo {this.Edad} años, juego de {this.Posicion}, mi número es el {this.Numero}, llevo {this.Goles} goles y soy {titularidad}.");
         }
 
         public Boolean EsMayorEdad(int edad)
