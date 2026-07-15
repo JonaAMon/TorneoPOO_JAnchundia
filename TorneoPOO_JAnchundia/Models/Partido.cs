@@ -7,28 +7,104 @@ namespace TorneoPOO_JAnchundia.Models
    
     public class Partido
     {
-        public Equipo Local { get; set; }
-        public Equipo Visitante { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Lugar { get; set; }
+        private Equipo local;
+        private Equipo visitante; 
+        private DateTime fecha; 
+        private string lugar;
+        private int asistenciaEspectadores;
+        private int duracionMinutos;
+        private string estado;
 
-        public Partido(Equipo local, Equipo visitante, DateTime fecha, string lugar)
+        public Equipo Local
         {
-            if (local == null || visitante == null)
+            get => local;
+            set
             {
-                throw new ArgumentException("Los equipos no pueden ser nulos.");
+                if (value == null)
+                    throw new ArgumentException("El equipo local no puede ser nulo.");
+                local = value;
             }
+        }
 
-            if (local.Nombre == visitante.Nombre)
+        public Equipo Visitante
+        {
+            get => visitante;
+            set
             {
-                throw new ArgumentException("El equipo local y visitante deben ser distintos.");
+                if (value == null)
+                    throw new ArgumentException("El equipo visitante no puede ser nulo.");
+
+                // Solución: Cambiar .NombreEquipo por .Nombre
+                if (local != null && value.Nombre == local.Nombre)
+                    throw new ArgumentException("El equipo local y visitante deben ser distintos.");
+
+                visitante = value;
             }
-            
+        }
+
+        public DateTime Fecha
+        {
+            get => fecha;
+            set => fecha = value;
+        }
+
+        public string Lugar
+        {
+            get => lugar;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("El lugar del partido no puede estar vacío.");
+                lugar = value;
+            }
+        }
+        public int AsistenciaEspectadores
+        {
+            get => asistenciaEspectadores;
+            set
+            {
+                if (value < 0)
+                    throw new Exception("La asistencia de espectadores no puede ser un número negativo.");
+                asistenciaEspectadores = value;
+            }
+        }
+
+        public int DuracionMinutos
+        {
+            get => duracionMinutos;
+            set
+            {
+                if (value < 0)
+                    throw new Exception("La duración del partido no puede ser un tiempo negativo.");
+                duracionMinutos = value;
+            }
+        }
+
+        public string Estado
+        {
+            get => estado;
+            set
+            {
+                string est = value?.ToLower().Trim();
+                if (est != "programado" && est != "en juego" && est != "finalizado" && est != "suspendido")
+                {
+                    throw new Exception("Estado inválido. Debe ser: Programado, En juego, Finalizado o Suspendido.");
+                }
+                estado = char.ToUpper(est[0]) + est.Substring(1);
+            }
+        }
+        public Partido(Equipo local, Equipo visitante, DateTime fecha, string lugar, int asistenciaEspectadores, int duracionMinutos, string estado)
+        { 
+
             this.Local = local;
             this.Visitante = visitante;
             this.Fecha = fecha;
             this.Lugar = lugar;
+            this.asistenciaEspectadores = asistenciaEspectadores;
+            this.duracionMinutos = duracionMinutos;
+            this.estado = estado;
         }
+
 
         public void MostrarResumen()
             
