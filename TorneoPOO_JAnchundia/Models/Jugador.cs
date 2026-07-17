@@ -150,24 +150,28 @@ namespace TorneoPOO_JAnchundia.Models
             Console.WriteLine($"{Nombre} ahora tiene la camiseta número {nuevoNumero}");
         }
 
-    
-    public void Imprimir()
+
+        public void Imprimir()
         {
+           
+            string titularidad = this.EsTitular ? "Titular" : "Suplente";
+
             Console.WriteLine($"Cédula: {this.Cedula}");
             Console.WriteLine($"Nombre: {this.Nombre}");
-            Console.WriteLine($"Edad: {this.Edad}");
-            Console.WriteLine($"Lugar de Nacimiento: {this.nacionalidad}");
-            Console.WriteLine($"Número: {this.Numero}");
+            Console.WriteLine($"Edad: {this.Edad} años");
+            Console.WriteLine($"Lugar de Nacimiento: {this.Nacionalidad}");
+            Console.WriteLine($"Número de Camiseta: #{this.Numero}");
             Console.WriteLine($"Posición: {this.Posicion}");
-            Console.WriteLine($"Sueldo: {this.goles}");
-            Console.WriteLine($"Fichado: {this.esTitular}");
-            Console.WriteLine($"Fichado: {this.Fichado}");
+            Console.WriteLine($"Goles Anotados: {this.Goles}");
+            Console.WriteLine($"Condición: {titularidad}");
+            Console.WriteLine($"Fichado en Sistema: {this.Fichado}"); 
             Console.WriteLine($"Equipo Actual: {(this.equipo_actual != null ? this.equipo_actual.Nombre : "Sin equipo")}");
         }
 
-        private void Fichar()
+        public void Fichar(Equipo equipo)
         {
             this.fichado = "S";
+            this.equipo_actual = equipo;
         }
 
     }

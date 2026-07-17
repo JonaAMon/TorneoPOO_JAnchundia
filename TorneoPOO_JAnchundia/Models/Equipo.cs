@@ -31,10 +31,13 @@ namespace TorneoPOO_JAnchundia.Models
             this.estadio = estadio;
         }
 
-        public void AgregarJugador(Jugador objJugador)
+        public void AgregarJugador(Jugador jugador)
         {
-            this.Jugadores.Add(objJugador);
-            Console.WriteLine($"Jugador {objJugador.Nombre} agregado correctamente");
+            // Tu código actual que añade el jugador a la lista del equipo:
+            this.jugadores.Add(jugador);
+
+            // NUEVA LÍNEA: Le pasamos "this" (este equipo) al jugador para completar el fichaje
+            jugador.Fichar(this);
         }
         public void ListarPlantilla()
         {

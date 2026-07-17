@@ -43,5 +43,14 @@ namespace TorneoPOO_JAnchundia.Models
         }
 
         //AÑADIR IMPRIMIR PARTIDO
+        public void Imprimir()
+        {
+            Console.WriteLine($"Partido: {this.Local.Nombre} vs {this.Visitante.Nombre}");
+            Console.WriteLine($"Fecha: {this.Fecha.ToShortDateString()}");
+            Console.WriteLine($"Lugar: {this.Lugar}");
+            Console.WriteLine($"Espectadores: {this.AsistenciaEspectadores:N0}");
+            Console.WriteLine($"Duración: {this.DuracionMinutos} minutos");
+            Console.WriteLine($"Estado: {this.Estado}");
+        }
     }
 }
