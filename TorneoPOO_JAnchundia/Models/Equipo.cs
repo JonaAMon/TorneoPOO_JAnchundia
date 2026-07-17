@@ -13,76 +13,14 @@ namespace TorneoPOO_JAnchundia.Models
         private int puntos;
         private string estadio;
 
-        public string Nombre
-        {
-            get => nombre;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("El nombre del equipo no puede estar vacío.");
-                }
-                nombre = value;
-            }
-        }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Ciudad { get => ciudad; set => ciudad = value; }
+        public List<Jugador> Jugadores { get => jugadores; set => jugadores = value; }
+        public string DirectorTecnico { get => directorTecnico; set => directorTecnico = value; }
+        public int Puntos { get => puntos; set => puntos = value; }
+        public string Estadio { get => estadio; set => estadio = value; }
 
-        public string Ciudad
-        {
-            get => ciudad;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("La ciudad de origen del equipo no puede estar vacía.");
-                }
-                ciudad = value;
-            }
-        }
-
-        public List<Jugador> Jugadores
-        {
-            get => jugadores;
-            set => jugadores = value ?? new List<Jugador>(); 
-        }
-
-        public string DirectorTecnico
-        {
-            get => directorTecnico;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("El nombre del Director Técnico no puede estar vacío.");
-                }
-                directorTecnico = value;
-            }
-        }
-
-        public int Puntos
-        {
-            get => puntos;
-            set
-            {
-                if (value < 0)
-                {
-                    throw new Exception("Los puntos del equipo en el torneo no pueden ser negativos.");
-                }
-                puntos = value;
-            }
-        }
-
-        public string Estadio
-        {
-            get => estadio;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("El nombre del estadio no puede estar vacío.");
-                }
-                estadio = value;
-            }
-        }
+        
         public Equipo(string nombre, string ciudad, string directorTecnico, int puntos, string estadio)
         {
             this.Nombre = nombre;
@@ -93,32 +31,28 @@ namespace TorneoPOO_JAnchundia.Models
             this.estadio = estadio;
         }
 
-
+        public void AgregarJugador(Jugador objJugador)
+        {
+            this.Jugadores.Add(objJugador);
+            Console.WriteLine($"Jugador {objJugador.Nombre} agregado correctamente");
+        }
         public void ListarPlantilla()
         {
             Console.WriteLine($"\nLa lista de jugadores del equipo {this.Nombre} (Ciudad: {this.Ciudad} | DT: {this.DirectorTecnico} | Estadio: {this.Estadio} | Puntos: {this.Puntos}) es:");
             foreach (Jugador objJugador in Jugadores)
             {
-                objJugador.Presentar();
+                objJugador.Imprimir();
+                Console.WriteLine("-----------------------------------");
             }
         }
-        public void ContarJugadores()
+        public void Imprimir()
         {
-            Console.WriteLine($"El equipo {Nombre} tiene {Jugadores.Count} jugadores.");
-        }
-
-        public Jugador BuscarJugadorPorNumero(int numero)
-        {
-            foreach (Jugador j in Jugadores)
-            {
-                if (j.Numero == numero)
-                {
-                    Console.WriteLine($"Jugador encontrado: {j.Nombre}");
-                    return j;
-                }
-            }
-            Console.WriteLine("No se encontró jugador con ese número.");
-            return null;
+            Console.WriteLine($"Nombre del equipo: {this.Nombre}");
+            Console.WriteLine($"Ciudad del equipo: {this.Ciudad}");
+            Console.WriteLine($"Nombre del Director técnico: {this.directorTecnico}");
+            Console.WriteLine($"Cuantos puntos tiene: {this.puntos}");
+            Console.WriteLine($"Nombre del estadio: {this.estadio}");
+            ListarPlantilla();
         }
 
     }

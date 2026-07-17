@@ -12,22 +12,14 @@ namespace TorneoPOO_JAnchundia.Models
         private int numero;
         private string posicion;
         private string nacionalidad;
+        private string cedula;
         private int goles;
         private bool esTitular;
+        private string fichado;
+        private Equipo equipo_actual;
 
-        public string Nombre
-        {
-            get => nombre;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("El nombre no puede estar vacío.");
-                }
-                nombre = value;
-            }
-        }
-
+        public string Nombre { get => nombre; set => nombre = value; }
+        
         public int Edad
         {
             get => edad;
@@ -48,25 +40,13 @@ namespace TorneoPOO_JAnchundia.Models
             {
                 if (!EsNumeroValido(value))
                 {
-                    throw new Exception("El número de la camiseta debe estar entre 1 y 99.");
+                    throw new Exception("El número de la camiseta no es válido");
                 }
                 numero = value;
             }
         }
 
-        public string Posicion
-        {
-            get => posicion;
-            set
-            {
-                string pos = value?.ToLower().Trim();
-                if (pos != "portero" && pos != "defensa" && pos != "mediocampista" && pos != "delantero")
-                {
-                    throw new Exception("Posición inválida. Debe ser: Portero, Defensa, Mediocampista o Delantero.");
-                }
-                posicion = value;
-            }
-        }
+        public string Posicion { get => posicion; set => posicion = value; }
 
         public string Nacionalidad
         {
@@ -80,7 +60,18 @@ namespace TorneoPOO_JAnchundia.Models
                 nacionalidad = value;
             }
         }
-
+        public string Cedula
+        {
+            get => cedula;
+            set
+            {
+                if (value.Length != 10)
+                {
+                    throw new Exception("La cédula debe tener 10 dígitos");
+                }
+                cedula = value;
+            }
+        }
         public int Goles
         {
             get => goles;
@@ -99,10 +90,9 @@ namespace TorneoPOO_JAnchundia.Models
             get => esTitular;
             set => esTitular = value;
         }
-
-
+        public string Fichado { get => fichado; }
         //Constructor
-        public Jugador(string nombre, int edad, int numero, string posicion, string nacionalidad, int goles, bool esTitular)
+        public Jugador(string nombre, int edad, int numero, string posicion, string nacionalidad, string cedula, int goles, bool esTitular)
         {
 
             this.Nombre = nombre;
@@ -110,8 +100,10 @@ namespace TorneoPOO_JAnchundia.Models
             this.Numero = numero;
             this.Posicion = posicion;
             this.nacionalidad = nacionalidad;
+            this.Cedula = cedula;
             this.goles = goles;
             this.esTitular = esTitular;
+            this.fichado = "N";
         }
 
 
@@ -158,6 +150,26 @@ namespace TorneoPOO_JAnchundia.Models
             Console.WriteLine($"{Nombre} ahora tiene la camiseta número {nuevoNumero}");
         }
 
+    
+    public void Imprimir()
+        {
+            Console.WriteLine($"Cédula: {this.Cedula}");
+            Console.WriteLine($"Nombre: {this.Nombre}");
+            Console.WriteLine($"Edad: {this.Edad}");
+            Console.WriteLine($"Lugar de Nacimiento: {this.nacionalidad}");
+            Console.WriteLine($"Número: {this.Numero}");
+            Console.WriteLine($"Posición: {this.Posicion}");
+            Console.WriteLine($"Sueldo: {this.goles}");
+            Console.WriteLine($"Fichado: {this.esTitular}");
+            Console.WriteLine($"Fichado: {this.Fichado}");
+            Console.WriteLine($"Equipo Actual: {(this.equipo_actual != null ? this.equipo_actual.Nombre : "Sin equipo")}");
+        }
+
+        private void Fichar()
+        {
+            this.fichado = "S";
+        }
 
     }
 }
+  
