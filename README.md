@@ -23,3 +23,6 @@ Comportamientos de las clases
 
 2026-07-16 
 	CRUD de jugador CRUD de Equipo Se envía tarea de culminar las funciones restantes (9 a la 15)
+
+2026-07-17
+	Se agregaron las funciones restantes (9 a la 15) y se realizaron pruebas de las mismas.
