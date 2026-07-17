@@ -19,4 +19,7 @@ Comportamientos de las clases
 	Modificadores de acceso
 	Validaciones de propiedades
 	Se añadieron 3 atributos a cada clase
-	A cada una se añadió las propiedades, se las consideró dentro del constructor y se añadió validaciones pertinentes
+	A cada una se agregaron las propiedades, se las mostraron dentro del constructor y se agregaron validaciones pertinentes
+
+2026-07-16 
+	CRUD de jugador CRUD de Equipo Se envía tarea de culminar las funciones restantes (9 a la 15)
