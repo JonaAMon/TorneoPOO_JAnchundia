@@ -14,6 +14,10 @@ namespace TorneoPOO_JAnchundia.Models
         private int asistenciaEspectadores;
         private int duracionMinutos;
         private string estado;
+        private static int contadorId = 1;
+
+        public int Id { get; }
+
 
         public Equipo Local { get => local; set => local = value; }
         public Equipo Visitante { get => visitante; set => visitante = value; }
@@ -25,8 +29,9 @@ namespace TorneoPOO_JAnchundia.Models
 
        
         public Partido(Equipo local, Equipo visitante, DateTime fecha, string lugar, int asistenciaEspectadores, int duracionMinutos, string estado)
-        { 
+        {
 
+            this.Id = contadorId++;
             this.Local = local;
             this.Visitante = visitante;
             this.Fecha = fecha;
@@ -39,12 +44,13 @@ namespace TorneoPOO_JAnchundia.Models
 
         public void MostrarResumen()
         {
-            Console.WriteLine($"Hay un partido [{this.Estado}] entre el local {this.Local.Nombre} y el visitante {this.Visitante.Nombre} en el lugar {this.Lugar} el día {this.Fecha.ToShortDateString()}. Duración: {this.DuracionMinutos} min | Asistencia: {this.AsistenciaEspectadores:N0} personas.");
+            Console.WriteLine($"[ID: {this.Id}] Partido [{this.Estado}] entre {this.Local.Nombre} y {this.Visitante.Nombre}...");
         }
 
         //AÑADIR IMPRIMIR PARTIDO
         public void Imprimir()
         {
+            Console.WriteLine($"ID Único: {this.Id}"); // 4. Mostramos el ID numérico
             Console.WriteLine($"Partido: {this.Local.Nombre} vs {this.Visitante.Nombre}");
             Console.WriteLine($"Fecha: {this.Fecha.ToShortDateString()}");
             Console.WriteLine($"Lugar: {this.Lugar}");
