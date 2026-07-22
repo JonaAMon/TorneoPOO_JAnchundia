@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TorneoPOO_JAnchundia.Generales;
 
 namespace TorneoPOO_JAnchundia.Models
 {
@@ -17,6 +18,7 @@ namespace TorneoPOO_JAnchundia.Models
         private bool esTitular;
         private string fichado;
         private Equipo equipo_actual;
+        private int id;
 
         public string Nombre { get => nombre; set => nombre = value; }
         
@@ -91,6 +93,10 @@ namespace TorneoPOO_JAnchundia.Models
             set => esTitular = value;
         }
         public string Fichado { get => fichado; }
+         
+        public int Id { get => id; set => id = value;}
+
+
         //Constructor
         public Jugador(string nombre, int edad, int numero, string posicion, string nacionalidad, string cedula, int goles, bool esTitular)
         {
@@ -104,6 +110,14 @@ namespace TorneoPOO_JAnchundia.Models
             this.goles = goles;
             this.esTitular = esTitular;
             this.fichado = "N";
+            if (Database.Jugadores.Count == 0)
+            {
+                this.id = 1;
+            }
+            else
+            {
+                this.id = Database.Jugadores.Max(x => x.id) + 1;
+            }
         }
 
 

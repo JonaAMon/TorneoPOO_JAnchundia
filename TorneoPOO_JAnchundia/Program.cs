@@ -1,13 +1,7 @@
 ﻿using TorneoPOO_JAnchundia.Generales;
 using TorneoPOO_JAnchundia.Models;
 { 
-       
-        Jugador objJug1 = new Jugador("Jonathan Anchundia", 37, 10, "Mediocampista", "Guayaquil", "0924134299", 5, true);
-        Jugador objJug2 = new Jugador("Roberto Hidalgo", 30, 4, "Defensa", "Quito", "0123456789", 2, true);
-        Jugador objJug3 = new Jugador("Josué", 25, 1, "Arquero", "Guayaquil", "1234567890", 0, false);
-        Database.Jugadores.Add(objJug1);
-        Database.Jugadores.Add(objJug2);
-        Database.Jugadores.Add(objJug3);
+     Database.CargarDatos();
     int opcion = 0;
     do
     {
@@ -114,6 +108,7 @@ using TorneoPOO_JAnchundia.Models;
 
         Jugador objJugador = new Jugador(nombre, edad, numero, posicion, lugarNacimiento, cedula, goles, esTitular);
         Database.Jugadores.Add(objJugador);
+        Database.GuardarJugadores();
         Console.WriteLine("Jugador creado exitosamente.");
         Console.ReadLine();
 
@@ -175,7 +170,9 @@ using TorneoPOO_JAnchundia.Models;
             objJugador.Goles = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("¿Es titular? S/N: ");
             objJugador.EsTitular = Console.ReadLine().ToUpper() == "S";
+            Database.GuardarJugadores();
             Console.WriteLine("Jugador actualizado exitosamente.");
+           
         }
         else
         {
@@ -228,6 +225,7 @@ using TorneoPOO_JAnchundia.Models;
         string estadio = Console.ReadLine();
 
         Equipo objEquipo = new Equipo(nombre, ciudad, directorTecnico, puntos, estadio);
+        Database.GuardarJugadores();
         Console.WriteLine("Equipo creado exitosamente.");
         string respuesta = "";
         do

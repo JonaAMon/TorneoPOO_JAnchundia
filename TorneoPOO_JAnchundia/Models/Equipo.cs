@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TorneoPOO_JAnchundia.Generales;
 
 namespace TorneoPOO_JAnchundia.Models
 {
@@ -12,6 +13,7 @@ namespace TorneoPOO_JAnchundia.Models
         private string directorTecnico;
         private int puntos;
         private string estadio;
+        private int id;
 
         public string Nombre { get => nombre; set => nombre = value; }
         public string Ciudad { get => ciudad; set => ciudad = value; }
@@ -19,8 +21,10 @@ namespace TorneoPOO_JAnchundia.Models
         public string DirectorTecnico { get => directorTecnico; set => directorTecnico = value; }
         public int Puntos { get => puntos; set => puntos = value; }
         public string Estadio { get => estadio; set => estadio = value; }
+        public int Id { get => id; set => id = value; }
 
-        
+
+
         public Equipo(string nombre, string ciudad, string directorTecnico, int puntos, string estadio)
         {
             this.Nombre = nombre;
@@ -29,6 +33,14 @@ namespace TorneoPOO_JAnchundia.Models
             this.directorTecnico = directorTecnico;
             this.puntos = puntos;
             this.estadio = estadio;
+            if (Database.Equipos.Count == 0)
+            {
+                this.id = 1;
+            }
+            else
+            {
+                this.id = Database.Equipos.Max(x => x.id) + 1;
+            }
         }
 
         public void AgregarJugador(Jugador jugador)

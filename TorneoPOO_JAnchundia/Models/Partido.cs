@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TorneoPOO_JAnchundia.Generales;
 
 namespace TorneoPOO_JAnchundia.Models
 {
@@ -14,10 +15,8 @@ namespace TorneoPOO_JAnchundia.Models
         private int asistenciaEspectadores;
         private int duracionMinutos;
         private string estado;
-        private static int contadorId = 1;
-
-        public int Id { get; }
-
+        private int id;
+       
 
         public Equipo Local { get => local; set => local = value; }
         public Equipo Visitante { get => visitante; set => visitante = value; }
@@ -27,11 +26,12 @@ namespace TorneoPOO_JAnchundia.Models
         public int DuracionMinutos { get => duracionMinutos; set => duracionMinutos = value; }
         public string Estado { get => estado; set => estado = value; }
 
-       
+        public int Id { get => id; set => id = value; }
+
+
         public Partido(Equipo local, Equipo visitante, DateTime fecha, string lugar, int asistenciaEspectadores, int duracionMinutos, string estado)
         {
 
-            this.Id = contadorId++;
             this.Local = local;
             this.Visitante = visitante;
             this.Fecha = fecha;
@@ -39,6 +39,14 @@ namespace TorneoPOO_JAnchundia.Models
             this.asistenciaEspectadores = asistenciaEspectadores;
             this.duracionMinutos = duracionMinutos;
             this.estado = estado;
+            if (Database.Partido.Count == 0)
+            {
+                this.id = 1;
+            }
+            else
+            {
+                this.id = Database.Partido.Max(x => x.id) + 1;
+            }
         }
 
 
