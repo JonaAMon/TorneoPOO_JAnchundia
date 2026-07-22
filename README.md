@@ -27,3 +27,6 @@ Comportamientos de las clases
 2026-07-17
 	Se agregaron las funciones restantes (9 a la 15) y se realizaron pruebas de las mismas.
 	Se agrego identificador único del partido.
+
+2026-07-21
+	Inicio de archivos, serializador Json
