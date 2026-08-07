@@ -1,7 +1,7 @@
-﻿using TorneoPOO_JAnchundia.Generales;
+﻿using TorneoPOO_JAnchundia.Datos;
+using TorneoPOO_JAnchundia.Generales;
 using TorneoPOO_JAnchundia.Models;
-{ 
-     Database.CargarDatos();
+ 
     int opcion = 0;
     do
     {
@@ -107,8 +107,13 @@ using TorneoPOO_JAnchundia.Models;
         bool esTitular = Console.ReadLine().ToUpper() == "S";
 
         Jugador objJugador = new Jugador(nombre, edad, numero, posicion, lugarNacimiento, cedula, goles, esTitular);
-        Database.Jugadores.Add(objJugador);
-        Database.GuardarJugadores();
+        using (var context = new TorneoDbContext())
+        {
+            context.Jugadores.Add(objJugador);
+            context.SaveChanges();
+        }
+        //Database.Jugadores.Add(objJugador);
+        //Database.GuardarJugadores();
         Console.WriteLine("Jugador creado exitosamente.");
         Console.ReadLine();
 
@@ -117,7 +122,8 @@ using TorneoPOO_JAnchundia.Models;
     {
         Console.Clear();
         Console.WriteLine("**********Jugadores Creados**********");
-        foreach (Jugador jugador in Database.Jugadores)
+        var contex = new TorneoDbContext();
+        foreach (Jugador jugador in contex.Jugadores)
         {
             jugador.Imprimir();
             Console.WriteLine("-----------------------------------");
@@ -130,7 +136,8 @@ using TorneoPOO_JAnchundia.Models;
         Console.WriteLine("**********Buscar Jugador**********");
         Console.WriteLine("Ingrese la cédula del jugador a buscar: ");
         string cedulaIngresada = Console.ReadLine();
-        Jugador objJugador = Database.Jugadores.Find(j => j.Cedula == cedulaIngresada);
+        var contex = new TorneoDbContext();
+        Jugador objJugador = contex.Jugadores.Where(j => j.Cedula == cedulaIngresada).FirstOrDefault();
         if (objJugador != null)
         {
             Console.WriteLine("Jugador encontrado:");
@@ -149,7 +156,8 @@ using TorneoPOO_JAnchundia.Models;
         Console.WriteLine("**********Actualizar Jugador**********");
         Console.WriteLine("Ingrese la cédula del jugador a actualizar: ");
         string cedulaIngresada = Console.ReadLine();
-        Jugador objJugador = Database.Jugadores.Find(j => j.Cedula == cedulaIngresada);
+        var contex = new TorneoDbContext();
+        Jugador objJugador = contex.Jugadores.Where(j => j.Cedula == cedulaIngresada).FirstOrDefault();
         if (objJugador != null)
         {
             Console.WriteLine("Jugador encontrado:");
@@ -170,7 +178,7 @@ using TorneoPOO_JAnchundia.Models;
             objJugador.Goles = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("¿Es titular? S/N: ");
             objJugador.EsTitular = Console.ReadLine().ToUpper() == "S";
-            Database.GuardarJugadores();
+            contex.SaveChanges();
             Console.WriteLine("Jugador actualizado exitosamente.");
            
         }
@@ -186,7 +194,8 @@ using TorneoPOO_JAnchundia.Models;
         Console.WriteLine("**********Elimar Jugador**********");
         Console.WriteLine("Ingrese la cédula del jugador a eliminar: ");
         string cedulaIngresada = Console.ReadLine();
-        Jugador objJugador = Database.Jugadores.Find(j => j.Cedula == cedulaIngresada);
+        var contex = new TorneoDbContext();
+        Jugador objJugador = contex.Jugadores.Where(j => j.Cedula == cedulaIngresada).FirstOrDefault();
         if (objJugador != null)
         {
             Console.WriteLine("-----------------------------------");
@@ -195,7 +204,8 @@ using TorneoPOO_JAnchundia.Models;
             Console.WriteLine($"¿Está seguro de que desea eliminar al jugador {objJugador.Nombre} ? S/N:");
             if (Console.ReadLine().ToUpper() == "S")
             {
-                Database.Jugadores.Remove(objJugador);
+                contex.Jugadores.Remove(objJugador);
+                contex.SaveChanges();
                 Console.WriteLine("Jugador eliminado exitosamente.");
             }
             else
@@ -544,7 +554,7 @@ using TorneoPOO_JAnchundia.Models;
         }
         Console.ReadLine();
     }
-}
+
 
 
 

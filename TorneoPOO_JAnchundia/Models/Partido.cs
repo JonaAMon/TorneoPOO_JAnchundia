@@ -8,15 +8,20 @@ namespace TorneoPOO_JAnchundia.Models
    
     public class Partido
     {
+        private int id;
         private Equipo local;
         private Equipo visitante; 
         private DateTime fecha; 
-        private string lugar;
+        private string? lugar;
         private int asistenciaEspectadores;
         private int duracionMinutos;
         private string estado;
-        private int id;
-       
+        
+
+
+        private int? localId { get; set; }
+        private int? visitanteId { get; set; }      
+
 
         public Equipo Local { get => local; set => local = value; }
         public Equipo Visitante { get => visitante; set => visitante = value; }
@@ -27,6 +32,10 @@ namespace TorneoPOO_JAnchundia.Models
         public string Estado { get => estado; set => estado = value; }
 
         public int Id { get => id; set => id = value; }
+
+        public int? LocalId { get => localId; set => localId = value; }
+        public int? VisitanteId { get => visitanteId; set => visitanteId = value; }
+
 
 
         public Partido(Equipo local, Equipo visitante, DateTime fecha, string lugar, int asistenciaEspectadores, int duracionMinutos, string estado)
@@ -39,14 +48,12 @@ namespace TorneoPOO_JAnchundia.Models
             this.asistenciaEspectadores = asistenciaEspectadores;
             this.duracionMinutos = duracionMinutos;
             this.estado = estado;
-            if (Database.Partido.Count == 0)
-            {
-                this.id = 1;
-            }
-            else
-            {
-                this.id = Database.Partido.Max(x => x.id) + 1;
-            }
+            
+        }
+
+        public Partido()
+        {
+
         }
 
 

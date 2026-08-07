@@ -15,6 +15,8 @@ namespace TorneoPOO_JAnchundia.Models
         private string estadio;
         private int id;
 
+
+
         public string Nombre { get => nombre; set => nombre = value; }
         public string Ciudad { get => ciudad; set => ciudad = value; }
         public List<Jugador> Jugadores { get => jugadores; set => jugadores = value; }
@@ -33,23 +35,18 @@ namespace TorneoPOO_JAnchundia.Models
             this.directorTecnico = directorTecnico;
             this.puntos = puntos;
             this.estadio = estadio;
-            if (Database.Equipos.Count == 0)
-            {
-                this.id = 1;
-            }
-            else
-            {
-                this.id = Database.Equipos.Max(x => x.id) + 1;
-            }
+
         }
-
-        public void AgregarJugador(Jugador jugador)
+        public Equipo()
         {
-            // Tu código actual que añade el jugador a la lista del equipo:
-            this.jugadores.Add(jugador);
 
-            // NUEVA LÍNEA: Le pasamos "this" (este equipo) al jugador para completar el fichaje
-            jugador.Fichar(this);
+        }
+        
+
+        public void AgregarJugador(Jugador objJugador)
+        {
+            this.Jugadores.Add(objJugador);
+            Console.WriteLine($"Jugador {objJugador.Nombre} agregado correctamente");
         }
         public void ListarPlantilla()
         {

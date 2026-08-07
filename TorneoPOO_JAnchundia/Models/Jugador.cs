@@ -17,8 +17,9 @@ namespace TorneoPOO_JAnchundia.Models
         private int goles;
         private bool esTitular;
         private string fichado;
-        private Equipo equipo_actual;
+        private Equipo? equipo_actual;
         private int id;
+        private int? equipoId { get; set; }
 
         public string Nombre { get => nombre; set => nombre = value; }
         
@@ -92,9 +93,13 @@ namespace TorneoPOO_JAnchundia.Models
             get => esTitular;
             set => esTitular = value;
         }
-        public string Fichado { get => fichado; }
-         
-        public int Id { get => id; set => id = value;}
+        public string Fichado { get => fichado; private set => fichado = value; }
+
+        public int Id { get => id; set => id = value; }
+
+        public int? EquipoId { get => equipoId; set => equipoId = value; }
+        public Equipo? EquipoActual { get => equipo_actual; set => equipo_actual = value; }
+
 
 
         //Constructor
@@ -110,14 +115,15 @@ namespace TorneoPOO_JAnchundia.Models
             this.goles = goles;
             this.esTitular = esTitular;
             this.fichado = "N";
-            if (Database.Jugadores.Count == 0)
-            {
-                this.id = 1;
-            }
-            else
-            {
-                this.id = Database.Jugadores.Max(x => x.id) + 1;
-            }
+            this.EquipoActual = null;
+            this.EquipoId = null;
+
+            
+        }
+        public Jugador()
+        {
+            this.fichado = "N";
+            this.equipo_actual = null;
         }
 
 
