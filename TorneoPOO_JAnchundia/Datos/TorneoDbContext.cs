@@ -18,14 +18,16 @@ namespace TorneoPOO_JAnchundia.Datos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //CADENA CONEXION USUARIO SQL SERVER
-            // optionsBuilder.UseSqlServer("Server=LT-EMANOSALVAS;Database=TORNEO_JAnchhundia;User Id=sa;Password=R3pr3s3ntac10n3s.2024;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-QE2VON0\\SQLEXPRESS;Database=TORNEO_JANCHUNDIA;User Id=sa;Password=1234;TrustServerCertificate=True;");
             //CADENA CONEXION USUARIO WINDOWS
-            optionsBuilder.UseSqlServer("Server=localhost;Database=TorneoDB;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer("Server=localhost;Database=TorneoDB;Trusted_Connection=True;");
         }
 
         //3er paso Configurar las relaciones entre las tablas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             //Relacion 1 a muchos entre Equipo y Jugador
             modelBuilder.Entity<Models.Equipo>()
                 .HasMany(e => e.Jugadores)
