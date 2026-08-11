@@ -39,6 +39,7 @@ namespace TorneoPOO_JAnchundia.Models
         }
         public Equipo()
         {
+            jugadores = new List<Jugador>();
 
         }
         
@@ -50,11 +51,18 @@ namespace TorneoPOO_JAnchundia.Models
         }
         public void ListarPlantilla()
         {
-            Console.WriteLine($"\nLa lista de jugadores del equipo {this.Nombre} (Ciudad: {this.Ciudad} | DT: {this.DirectorTecnico} | Estadio: {this.Estadio} | Puntos: {this.Puntos}) es:");
+            Console.WriteLine($"\nLa lista de jugadores del equipo {this.Nombre} es:");
+
+            if (Jugadores == null || Jugadores.Count == 0)
+            {
+                Console.WriteLine("No hay jugadores registrados en este equipo.");
+                return;
+            }
+
             foreach (Jugador objJugador in Jugadores)
             {
                 objJugador.Imprimir();
-                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("----------------------------------");
             }
         }
         public void Imprimir()
@@ -64,7 +72,6 @@ namespace TorneoPOO_JAnchundia.Models
             Console.WriteLine($"Nombre del Director técnico: {this.directorTecnico}");
             Console.WriteLine($"Cuantos puntos tiene: {this.puntos}");
             Console.WriteLine($"Nombre del estadio: {this.estadio}");
-            ListarPlantilla();
         }
 
     }

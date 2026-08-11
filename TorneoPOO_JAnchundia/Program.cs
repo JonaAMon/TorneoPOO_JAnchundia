@@ -1,143 +1,172 @@
-﻿using TorneoPOO_JAnchundia.Datos;
+﻿using Microsoft.EntityFrameworkCore;
+using TorneoPOO_JAnchundia.Datos;
 using TorneoPOO_JAnchundia.Generales;
 using TorneoPOO_JAnchundia.Models;
- 
-    int opcion = 0;
-    do
+
+int opcion = 0;
+do
+{
+    Console.Clear();
+    Console.WriteLine("****************Bienvenido al Torneo de Futbol - ISTLC 2026****************");
+    Console.WriteLine("Menú de Opciones:");
+    Console.WriteLine("1.- Crear Jugadores");
+    Console.WriteLine("2.- Listar Jugadores");
+    Console.WriteLine("3.- Buscar Jugador");
+    Console.WriteLine("4.- Actualizar Jugador");
+    Console.WriteLine("5.- Eliminar Jugador");
+    Console.WriteLine("6.- Crear Equipos");
+    Console.WriteLine("7.- Listar Equipos");
+    Console.WriteLine("8.- Buscar Equipo");
+    Console.WriteLine("9.- Actualizar Equipos");
+    Console.WriteLine("10.- Eliminar Equipos");
+    Console.WriteLine("11.- Crear Partidos");
+    Console.WriteLine("12.- Listar Partidos");
+    Console.WriteLine("13.- Buscar Partido");
+    Console.WriteLine("14.- Actualizar Partido");
+    Console.WriteLine("15.- Eliminar Partido");
+    Console.WriteLine("16.- Salir");
+    Console.WriteLine("");
+    Console.Write("Ingrese una opción: ");
+
+    if (!int.TryParse(Console.ReadLine(), out opcion))
     {
-        Console.Clear();
-        Console.WriteLine("****************Bienvenido al Torneo de Futbol - ISTLC 2026****************");
-        Console.WriteLine("Menú de Opciones:");
-        Console.WriteLine("1.- Crear Jugadores");
-        Console.WriteLine("2.- Listar Jugadores");
-        Console.WriteLine("3.- Buscar Jugador");
-        Console.WriteLine("4.- Actualizar Jugador");
-        Console.WriteLine("5.- Eliminar Jugador");
-        Console.WriteLine("6.- Crear Equipos");
-        Console.WriteLine("7.- Listar Equipos");
-        Console.WriteLine("8.- Buscar Equipo");
-        Console.WriteLine("9.- Actualizar Equipos");
-        Console.WriteLine("10.- Eliminar Equipos");
-        Console.WriteLine("11.- Crear Partidos");
-        Console.WriteLine("12.- Listar Partidos");
-        Console.WriteLine("13.- Buscar Partido");
-        Console.WriteLine("14.- Actualizar Partido");
-        Console.WriteLine("15.- Eliminar Partido");
-        Console.WriteLine("16.- Salir");
-        Console.WriteLine("");
-        Console.Write("Ingrese una opción: ");
-        opcion = Convert.ToInt32(Console.ReadLine());
-        switch (opcion)
-        {
-            case 1:
-                crearJugador();
-                break;
-            case 2:
-                listarJugadores();
-                break;
-            case 3:
-                BuscarJugador();
-                break;
-            case 4:
-                ActualizarJugador();
-                break;
-            case 5:
-                EliminarJugador();
-                break;
-            case 6:
-                crearEquipo();
-                break;
-            case 7:
-                listarEquipos(); 
-                break;
-            case 8:
-                buscarEquipo();
-                break;
-            case 9:
-                ActualizarEquipo(); 
-                break;
-            case 10:
-                EliminarEquipo(); 
-                break;
-            case 11:
-                crearPartido(); 
-                break;
-            case 12:
-                listarPartidos(); 
-                break;
-            case 13:
-                buscarPartido(); 
-                break;
-            case 14:
-                ActualizarPartido(); 
-                break;
-            case 15:
-                EliminarPartido(); 
-                break;
-            case 16:
-                Console.WriteLine("Saliendo del programa...");
-                break;
-            default:
-                Console.WriteLine("Opción inválida. Por favor, intente nuevamente.");
-                break;
-        }
-
-    } while (opcion != 16);
-
-
-    void crearJugador()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Crear Jugador**********");
-        Console.WriteLine("Ingrese el nombre del jugador: ");
-        string nombre = Console.ReadLine();
-        Console.WriteLine("Ingrese la edad del jugador: ");
-        int edad = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Ingrese el número del jugador: ");
-        int numero = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Ingrese la posición del jugador: ");
-        string posicion = Console.ReadLine();
-        Console.WriteLine("Ingrese el lugar de nacimiento del jugador: ");
-        string lugarNacimiento = Console.ReadLine();
-        Console.WriteLine("Ingrese la cédula del jugador: ");
-        string cedula = Console.ReadLine();
-        Console.WriteLine("Ingrese los goles del jugador: ");
-        int goles = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("¿Es titular? S/N: ");
-        bool esTitular = Console.ReadLine().ToUpper() == "S";
-
-        Jugador objJugador = new Jugador(nombre, edad, numero, posicion, lugarNacimiento, cedula, goles, esTitular);
-        using (var context = new TorneoDbContext())
-        {
-            context.Jugadores.Add(objJugador);
-            context.SaveChanges();
-        }
-        //Database.Jugadores.Add(objJugador);
-        //Database.GuardarJugadores();
-        Console.WriteLine("Jugador creado exitosamente.");
-        Console.ReadLine();
-
+        opcion = 0;
     }
-    void listarJugadores()
+
+    switch (opcion)
     {
-        Console.Clear();
-        Console.WriteLine("**********Jugadores Creados**********");
-        var contex = new TorneoDbContext();
-        foreach (Jugador jugador in contex.Jugadores)
-        {
-            jugador.Imprimir();
-            Console.WriteLine("-----------------------------------");
-        }
-        Console.ReadLine();
+        case 1:
+            crearJugador();
+            break;
+        case 2:
+            listarJugadores();
+            break;
+        case 3:
+            BuscarJugador();
+            break;
+        case 4:
+            ActualizarJugador();
+            break;
+        case 5:
+            EliminarJugador();
+            break;
+        case 6:
+            crearEquipo();
+            break;
+        case 7:
+            ListarEquipos();
+            break;
+        case 8:
+            BuscarEquipo();
+            break;
+        case 9:
+            ActualizarEquipo();
+            break;
+        case 10:
+            EliminarEquipo();
+            break;
+        case 11:
+            crearPartido();
+            break;
+        case 12:
+            listarPartidos();
+            break;
+        case 13:
+            buscarPartido();
+            break;
+        case 14:
+            ActualizarPartido();
+            break;
+        case 15:
+            EliminarPartido();
+            break;
+        case 16:
+            Console.WriteLine("Saliendo del programa...");
+            break;
+        default:
+            Console.WriteLine("Opción inválida. Por favor, intente nuevamente.");
+            Console.ReadLine();
+            break;
     }
-    void BuscarJugador()
+
+} while (opcion != 16);
+
+
+
+void crearJugador()
+{
+    Console.Clear();
+    Console.WriteLine("**********Crear Jugador**********");
+    Console.WriteLine("Ingrese el nombre del jugador: ");
+    string nombre = Console.ReadLine();
+
+    Console.WriteLine("Ingrese la edad del jugador: ");
+    int.TryParse(Console.ReadLine(), out int edad);
+
+    Console.WriteLine("Ingrese el número del jugador: ");
+    int.TryParse(Console.ReadLine(), out int numero);
+
+    Console.WriteLine("Ingrese la posición del jugador: ");
+    string posicion = Console.ReadLine();
+
+    Console.WriteLine("Ingrese el lugar de nacimiento del jugador: ");
+    string lugarNacimiento = Console.ReadLine();
+
+    Console.WriteLine("Ingrese la cédula del jugador: ");
+    string cedula = Console.ReadLine();
+
+    Console.WriteLine("Ingrese los goles del jugador: ");
+    int.TryParse(Console.ReadLine(), out int goles);
+
+    Console.WriteLine("¿Es titular? S/N: ");
+    bool esTitular = Console.ReadLine().ToUpper() == "S";
+
+    Jugador objJugador = new Jugador(nombre, edad, numero, posicion, lugarNacimiento, cedula, goles, esTitular);
+
+    using (var context = new TorneoDbContext())
     {
-        Console.Clear();
-        Console.WriteLine("**********Buscar Jugador**********");
-        Console.WriteLine("Ingrese la cédula del jugador a buscar: ");
-        string cedulaIngresada = Console.ReadLine();
-        var contex = new TorneoDbContext();
-        Jugador objJugador = contex.Jugadores.Where(j => j.Cedula == cedulaIngresada).FirstOrDefault();
+        context.Jugadores.Add(objJugador);
+        context.SaveChanges();
+    }
+
+    Console.WriteLine("Jugador creado exitosamente.");
+    Console.ReadLine();
+}
+
+void listarJugadores()
+{
+    Console.Clear();
+    Console.WriteLine("**********Jugadores Creados**********");
+
+    using (var context = new TorneoDbContext())
+    {
+        var listaJugadores = context.Jugadores.ToList();
+        if (listaJugadores.Count == 0)
+        {
+            Console.WriteLine("No hay jugadores registrados.");
+        }
+        else
+        {
+            foreach (Jugador jugador in listaJugadores)
+            {
+                jugador.Imprimir();
+                Console.WriteLine("-----------------------------------");
+            }
+        }
+    }
+    Console.ReadLine();
+}
+
+void BuscarJugador()
+{
+    Console.Clear();
+    Console.WriteLine("**********Buscar Jugador**********");
+    Console.WriteLine("Ingrese la cédula del jugador a buscar: ");
+    string cedulaIngresada = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
+    {
+        Jugador objJugador = context.Jugadores.FirstOrDefault(j => j.Cedula == cedulaIngresada);
         if (objJugador != null)
         {
             Console.WriteLine("Jugador encontrado:");
@@ -148,64 +177,79 @@ using TorneoPOO_JAnchundia.Models;
         {
             Console.WriteLine("Jugador no encontrado.");
         }
-        Console.ReadLine();
     }
-    void ActualizarJugador()
+    Console.ReadLine();
+}
+
+void ActualizarJugador()
+{
+    Console.Clear();
+    Console.WriteLine("**********Actualizar Jugador**********");
+    Console.WriteLine("Ingrese la cédula del jugador a actualizar: ");
+    string cedulaIngresada = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
     {
-        Console.Clear();
-        Console.WriteLine("**********Actualizar Jugador**********");
-        Console.WriteLine("Ingrese la cédula del jugador a actualizar: ");
-        string cedulaIngresada = Console.ReadLine();
-        var contex = new TorneoDbContext();
-        Jugador objJugador = contex.Jugadores.Where(j => j.Cedula == cedulaIngresada).FirstOrDefault();
+        Jugador objJugador = context.Jugadores.FirstOrDefault(j => j.Cedula == cedulaIngresada);
         if (objJugador != null)
         {
             Console.WriteLine("Jugador encontrado:");
             Console.WriteLine("-----------------------------------");
             objJugador.Imprimir();
             Console.WriteLine("-----------------------------------");
+
             Console.WriteLine("Ingrese el nuevo nombre del jugador: ");
             objJugador.Nombre = Console.ReadLine();
+
             Console.WriteLine("Ingrese la nueva edad del jugador: ");
-            objJugador.Edad = Convert.ToInt32(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int nuevaEdad)) objJugador.Edad = nuevaEdad;
+
             Console.WriteLine("Ingrese el nuevo número del jugador: ");
-            objJugador.Numero = Convert.ToInt32(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int nuevoNumero)) objJugador.Numero = nuevoNumero;
+
             Console.WriteLine("Ingrese la nueva posición del jugador: ");
             objJugador.Posicion = Console.ReadLine();
-            Console.WriteLine("Ingrese la nacionalidad del jugador: ");
+
+            Console.WriteLine("Ingrese el nuevo lugar de nacimiento del jugador: ");
             objJugador.Nacionalidad = Console.ReadLine();
+
             Console.WriteLine("Ingrese el nuevo número de goles del jugador: ");
-            objJugador.Goles = Convert.ToInt32(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int nuevosGoles)) objJugador.Goles = nuevosGoles;
+
             Console.WriteLine("¿Es titular? S/N: ");
             objJugador.EsTitular = Console.ReadLine().ToUpper() == "S";
-            contex.SaveChanges();
+
+            context.SaveChanges();
             Console.WriteLine("Jugador actualizado exitosamente.");
-           
         }
         else
         {
             Console.WriteLine("Jugador no encontrado.");
         }
-        Console.ReadLine();
     }
-    void EliminarJugador()
+    Console.ReadLine();
+}
+
+void EliminarJugador()
+{
+    Console.Clear();
+    Console.WriteLine("**********Eliminar Jugador**********");
+    Console.WriteLine("Ingrese la cédula del jugador a eliminar: ");
+    string cedulaIngresada = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
     {
-        Console.Clear();
-        Console.WriteLine("**********Elimar Jugador**********");
-        Console.WriteLine("Ingrese la cédula del jugador a eliminar: ");
-        string cedulaIngresada = Console.ReadLine();
-        var contex = new TorneoDbContext();
-        Jugador objJugador = contex.Jugadores.Where(j => j.Cedula == cedulaIngresada).FirstOrDefault();
+        Jugador objJugador = context.Jugadores.FirstOrDefault(j => j.Cedula == cedulaIngresada);
         if (objJugador != null)
         {
             Console.WriteLine("-----------------------------------");
             objJugador.Imprimir();
             Console.WriteLine("-----------------------------------");
-            Console.WriteLine($"¿Está seguro de que desea eliminar al jugador {objJugador.Nombre} ? S/N:");
+            Console.WriteLine($"¿Está seguro de que desea eliminar al jugador {objJugador.Nombre}? S/N:");
             if (Console.ReadLine().ToUpper() == "S")
             {
-                contex.Jugadores.Remove(objJugador);
-                contex.SaveChanges();
+                context.Jugadores.Remove(objJugador);
+                context.SaveChanges();
                 Console.WriteLine("Jugador eliminado exitosamente.");
             }
             else
@@ -217,98 +261,128 @@ using TorneoPOO_JAnchundia.Models;
         {
             Console.WriteLine("Jugador no encontrado.");
         }
-        Console.ReadLine();
     }
-    void crearEquipo()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Crear Equipo**********");
-        Console.WriteLine("Ingrese el nombre del equipo: ");
-        string nombre = Console.ReadLine();
-        Console.WriteLine("Ingrese la ciudad del equipo: ");
-        string ciudad = Console.ReadLine();
-        Console.WriteLine("Ingrese el director técnico del equipo: ");
-        string directorTecnico = Console.ReadLine();
-        Console.WriteLine("Ingrese los puntos del equipo: ");
-        int puntos = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Ingrese el nomnbre del estadio: ");
-        string estadio = Console.ReadLine();
+    Console.ReadLine();
+}
 
-        Equipo objEquipo = new Equipo(nombre, ciudad, directorTecnico, puntos, estadio);
-        Database.GuardarJugadores();
-        Console.WriteLine("Equipo creado exitosamente.");
+
+
+void crearEquipo()
+{
+    Console.Clear();
+    Console.WriteLine("**********Crear Equipo**********");
+    Console.WriteLine("Ingrese el nombre del equipo: ");
+    string nombre = Console.ReadLine();
+    Console.WriteLine("Ingrese la ciudad del equipo: ");
+    string ciudad = Console.ReadLine();
+    Console.WriteLine("Ingrese el director técnico del equipo: ");
+    string directorTecnico = Console.ReadLine();
+    Console.WriteLine("Ingrese los puntos del equipo: ");
+    int.TryParse(Console.ReadLine(), out int puntos);
+    Console.WriteLine("Ingrese el nombre del estadio: ");
+    string estadio = Console.ReadLine();
+
+    Equipo objEquipo = new Equipo(nombre, ciudad, directorTecnico, puntos, estadio);
+
+    using (var context = new TorneoDbContext())
+    {
         string respuesta = "";
         do
         {
-            Console.WriteLine("¿Desea Ingresar Jugadores? S/N");
-            respuesta = Console.ReadLine();
-            if (respuesta.ToUpper() == "S")
+            Console.WriteLine("¿Desea ingresar jugadores al equipo? S/N");
+            respuesta = Console.ReadLine().ToUpper();
+            if (respuesta == "S")
             {
-                Console.WriteLine("Ingrese la cédula del jugador a fichar");
+                Console.WriteLine("Ingrese la cédula del jugador a fichar: ");
                 string cedulaIngresada = Console.ReadLine();
-                Jugador objJugador = Database.Jugadores.Find(x => x.Cedula == cedulaIngresada);
+                Jugador objJugador = context.Jugadores.FirstOrDefault(j => j.Cedula == cedulaIngresada);
+
                 if (objJugador != null)
                 {
                     objEquipo.AgregarJugador(objJugador);
+                    Console.WriteLine($"Jugador {objJugador.Nombre} agregado al equipo.");
                 }
                 else
                 {
-                    Console.WriteLine("Jugador no encontrado.");
+                    Console.WriteLine("Jugador no encontrado en la base de datos.");
                 }
             }
-
         } while (respuesta == "S");
-        Database.Equipos.Add(objEquipo);
-        Console.ReadLine();
 
+        context.Equipos.Add(objEquipo);
+        context.SaveChanges();
     }
 
-    void listarEquipos()
+    Console.WriteLine("Equipo creado y guardado exitosamente en la base de datos.");
+    Console.ReadLine();
+}
+
+void ListarEquipos()
+{
+    Console.Clear();
+    Console.WriteLine("***Equipos Creados***");
+
+    using (var context = new TorneoDbContext())
     {
-        Console.Clear();
-        Console.WriteLine("**********Equipos Creados**********");
-        if (Database.Equipos.Count == 0)
+      
+        var listaEquipos = context.Equipos
+            .Include(e => e.Jugadores)
+            .ToList();
+
+        if (listaEquipos.Count == 0)
         {
             Console.WriteLine("No hay equipos registrados.");
         }
         else
         {
-            foreach (Equipo eq in Database.Equipos)
+            foreach (Equipo eq in listaEquipos)
             {
                 eq.Imprimir();
-                Console.WriteLine("===================================");
+                eq.ListarPlantilla(); 
+                Console.WriteLine("==================================================");
             }
         }
-        Console.ReadLine();
     }
+    Console.ReadLine();
+}
 
-    static void buscarEquipo()
+void BuscarEquipo()
+{
+    Console.Clear();
+    Console.WriteLine("**Buscar Equipo**");
+    Console.Write("Ingrese el nombre del equipo a buscar: ");
+    string nombreIngresado = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
     {
-        Console.Clear();
-        Console.WriteLine("**********Buscar Equipo**********");
-        Console.WriteLine("Ingrese el nombre del equipo a buscar: ");
-        string nombre_ingresado = Console.ReadLine();
-        Equipo objEquipo = Database.Equipos.Find(j => j.Nombre.ToUpper() == nombre_ingresado.ToUpper());
+        
+        var objEquipo = context.Equipos
+            .Include(e => e.Jugadores)
+            .FirstOrDefault(e => e.Nombre == nombreIngresado);
+
         if (objEquipo != null)
         {
-            Console.WriteLine("Equipo encontrado:");
-            Console.WriteLine("-----------------------------------");
             objEquipo.Imprimir();
+            
         }
         else
         {
             Console.WriteLine("Equipo no encontrado.");
         }
-        Console.ReadLine();
     }
-    void ActualizarEquipo()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Actualizar Equipo**********");
-        Console.WriteLine("Ingrese el nombre del equipo a actualizar: ");
-        string nombreBusqueda = Console.ReadLine();
+    Console.ReadLine();
+}
 
-        Equipo eq = Database.Equipos.Find(e => e.Nombre.ToUpper() == nombreBusqueda.ToUpper());
+void ActualizarEquipo()
+{
+    Console.Clear();
+    Console.WriteLine("**********Actualizar Equipo**********");
+    Console.WriteLine("Ingrese el nombre del equipo a actualizar: ");
+    string nombreBusqueda = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
+    {
+        Equipo eq = context.Equipos.FirstOrDefault(e => e.Nombre.ToUpper() == nombreBusqueda.ToUpper());
 
         if (eq != null)
         {
@@ -327,27 +401,32 @@ using TorneoPOO_JAnchundia.Models;
             eq.DirectorTecnico = Console.ReadLine();
 
             Console.WriteLine("Ingrese los nuevos puntos del equipo: ");
-            eq.Puntos = Convert.ToInt32(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int nuevosPuntos)) eq.Puntos = nuevosPuntos;
 
             Console.WriteLine("Ingrese el nuevo nombre del estadio: ");
             eq.Estadio = Console.ReadLine();
 
-            Console.WriteLine("Equipo actualizado exitosamente.");
+            context.SaveChanges();
+            Console.WriteLine("Equipo actualizado exitosamente en la base de datos.");
         }
         else
         {
             Console.WriteLine("Equipo no encontrado.");
         }
-        Console.ReadLine();
     }
-    void EliminarEquipo()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Eliminar Equipo**********");
-        Console.Write("Ingrese el nombre del equipo a eliminar: ");
-        string nombreBusqueda = Console.ReadLine();
+    Console.ReadLine();
+}
 
-        Equipo eq = Database.Equipos.Find(e => e.Nombre.ToUpper() == nombreBusqueda.ToUpper());
+void EliminarEquipo()
+{
+    Console.Clear();
+    Console.WriteLine("**********Eliminar Equipo**********");
+    Console.Write("Ingrese el nombre del equipo a eliminar: ");
+    string nombreBusqueda = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
+    {
+        Equipo eq = context.Equipos.FirstOrDefault(e => e.Nombre.ToUpper() == nombreBusqueda.ToUpper());
 
         if (eq != null)
         {
@@ -357,8 +436,9 @@ using TorneoPOO_JAnchundia.Models;
             Console.Write($"¿Está seguro de que desea eliminar al equipo {eq.Nombre}? S/N: ");
             if (Console.ReadLine().ToUpper() == "S")
             {
-                Database.Equipos.Remove(eq);
-                Console.WriteLine("Equipo eliminado exitosamente.");
+                context.Equipos.Remove(eq);
+                context.SaveChanges();
+                Console.WriteLine("Equipo eliminado exitosamente de la base de datos.");
             }
             else
             {
@@ -369,41 +449,48 @@ using TorneoPOO_JAnchundia.Models;
         {
             Console.WriteLine("Equipo no encontrado.");
         }
-        Console.ReadLine();
     }
-    void crearPartido()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Crear Partido**********");
+    Console.ReadLine();
+}
 
-        if (Database.Equipos.Count < 2)
+
+
+void crearPartido()
+{
+    Console.Clear();
+    Console.WriteLine("**********Crear Partido**********");
+
+    using (var context = new TorneoDbContext())
+    {
+        var equipos = context.Equipos.ToList();
+        if (equipos.Count < 2)
         {
-            Console.WriteLine("Error: Se necesitan al menos 2 equipos registrados para crear un partido.");
+            Console.WriteLine("Error: Se necesitan al menos 2 equipos registrados en la base de datos para programar un partido.");
             Console.ReadLine();
             return;
         }
 
         Console.WriteLine("Ingrese el nombre del equipo local: ");
         string nombreLocal = Console.ReadLine();
-        Equipo local = Database.Equipos.Find(e => e.Nombre.ToUpper() == nombreLocal.ToUpper());
+        Equipo local = context.Equipos.FirstOrDefault(e => e.Nombre.ToUpper() == nombreLocal.ToUpper());
         if (local == null)
         {
-            Console.WriteLine("Equipo no encontrado.");
+            Console.WriteLine("Equipo local no encontrado.");
             Console.ReadLine();
             return;
         }
 
         Console.WriteLine("Ingrese el nombre del equipo visitante: ");
         string nombreVisitante = Console.ReadLine();
-        Equipo visitante = Database.Equipos.Find(e => e.Nombre.ToUpper() == nombreVisitante.ToUpper());
+        Equipo visitante = context.Equipos.FirstOrDefault(e => e.Nombre.ToUpper() == nombreVisitante.ToUpper());
         if (visitante == null)
         {
-            Console.WriteLine("Equipo no encontrado.");
+            Console.WriteLine("Equipo visitante no encontrado.");
             Console.ReadLine();
             return;
         }
 
-        if (local.Nombre.ToUpper() == visitante.Nombre.ToUpper())
+        if (local.Id == visitante.Id)
         {
             Console.WriteLine("Un equipo no puede jugar contra sí mismo.");
             Console.ReadLine();
@@ -411,51 +498,80 @@ using TorneoPOO_JAnchundia.Models;
         }
 
         Console.WriteLine("Ingrese la fecha del partido (AAAA-MM-DD): ");
-        DateTime fecha = Convert.ToDateTime(Console.ReadLine());
+        DateTime.TryParse(Console.ReadLine(), out DateTime fecha);
+
         Console.WriteLine("Ingrese el lugar del partido: ");
         string lugar = Console.ReadLine();
+
         Console.WriteLine("Ingrese la asistencia de espectadores: ");
-        int espectadores = Convert.ToInt32(Console.ReadLine());
+        int.TryParse(Console.ReadLine(), out int espectadores);
+
         Console.WriteLine("Ingrese la duración del partido en minutos: ");
-        int duracion = Convert.ToInt32(Console.ReadLine());
+        int.TryParse(Console.ReadLine(), out int duracion);
+
         Console.WriteLine("Ingrese el estado del partido: ");
         string estado = Console.ReadLine();
 
-        Partido nuevoPartido = new Partido(local, visitante, fecha, lugar, espectadores, duracion, estado);
-        Console.WriteLine("Partido creado exitosamente.");
-
-        Database.Partido.Add(nuevoPartido);
-        Console.ReadLine();
-    }
-    void listarPartidos()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Partidos Registrados**********");
-        if (Database.Partido.Count == 0)
+        Partido nuevoPartido = new Partido
         {
-            Console.WriteLine("No hay partidos registrados.");
+            LocalId = local.Id,
+            VisitanteId = visitante.Id,
+            Fecha = fecha,
+            Lugar = lugar,
+            AsistenciaEspectadores = espectadores,
+            DuracionMinutos = duracion,
+            Estado = estado
+        };
+
+        context.Partidos.Add(nuevoPartido);
+        context.SaveChanges();
+        Console.WriteLine("Partido creado y guardado exitosamente en la base de datos.");
+    }
+    Console.ReadLine();
+}
+
+void listarPartidos()
+{
+    Console.Clear();
+    Console.WriteLine("**********Partidos Registrados**********");
+
+    using (var context = new TorneoDbContext())
+    {
+        var partidos = context.Partidos
+            .Include(p => p.Local)
+            .Include(p => p.Visitante)
+            .ToList();
+
+        if (partidos.Count == 0)
+        {
+            Console.WriteLine("No hay partidos registrados en la base de datos.");
         }
         else
         {
-            foreach (Partido part in Database.Partido)
+            foreach (Partido part in partidos)
             {
-                part.MostrarResumen(); 
+                part.MostrarResumen();
                 Console.WriteLine("----------------------------------------------------------------------");
             }
         }
-        Console.ReadLine();
     }
-    void buscarPartido()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Buscar Partido**********");
-        Console.WriteLine("Ingrese el nombre de uno de los equipos que jugó para buscar su partido: ");
-        string nombreEquipo = Console.ReadLine();
+    Console.ReadLine();
+}
 
-        Partido partidoEncontrado = Database.Partido.Find(p =>
-            p.Local.Nombre.ToUpper() == nombreEquipo.ToUpper() ||
-            p.Visitante.Nombre.ToUpper() == nombreEquipo.ToUpper()
-        );
+void buscarPartido()
+{
+    Console.Clear();
+    Console.WriteLine("**********Buscar Partido**********");
+    Console.WriteLine("Ingrese el nombre de uno de los equipos para buscar su partido: ");
+    string nombreEquipo = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
+    {
+        Partido partidoEncontrado = context.Partidos
+            .Include(p => p.Local)
+            .Include(p => p.Visitante)
+            .FirstOrDefault(p => p.Local.Nombre.ToUpper() == nombreEquipo.ToUpper() ||
+                                 p.Visitante.Nombre.ToUpper() == nombreEquipo.ToUpper());
 
         if (partidoEncontrado != null)
         {
@@ -467,23 +583,26 @@ using TorneoPOO_JAnchundia.Models;
         {
             Console.WriteLine("No se encontraron partidos para ese equipo.");
         }
-        Console.ReadLine();
     }
+    Console.ReadLine();
+}
 
-    void ActualizarPartido()
+void ActualizarPartido()
+{
+    Console.Clear();
+    Console.WriteLine("**********Actualizar Partido**********");
+    Console.WriteLine("Ingrese el nombre del equipo local del partido: ");
+    string localBusqueda = Console.ReadLine();
+    Console.WriteLine("Ingrese el nombre del equipo visitante: ");
+    string visitanteBusqueda = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
     {
-        Console.Clear();
-        Console.WriteLine("**********Actualizar Partido**********");
-        Console.WriteLine("Ingrese el nombre del equipo local del partido que desea actualizar: ");
-        string localBusqueda = Console.ReadLine();
-        Console.WriteLine("Ingrese el nombre del equipo visitante: ");
-        string visitanteBusqueda = Console.ReadLine();
-
-        
-        Partido part = Database.Partido.Find(p =>
-            p.Local.Nombre.ToUpper() == localBusqueda.ToUpper() &&
-            p.Visitante.Nombre.ToUpper() == visitanteBusqueda.ToUpper()
-        );
+        Partido part = context.Partidos
+            .Include(p => p.Local)
+            .Include(p => p.Visitante)
+            .FirstOrDefault(p => p.Local.Nombre.ToUpper() == localBusqueda.ToUpper() &&
+                                 p.Visitante.Nombre.ToUpper() == visitanteBusqueda.ToUpper());
 
         if (part != null)
         {
@@ -492,7 +611,7 @@ using TorneoPOO_JAnchundia.Models;
 
             Console.Write($"Nueva fecha (actual: {part.Fecha.ToShortDateString()}): ");
             string fechaInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(fechaInput)) part.Fecha = Convert.ToDateTime(fechaInput);
+            if (DateTime.TryParse(fechaInput, out DateTime nuevaFecha)) part.Fecha = nuevaFecha;
 
             Console.Write($"Nuevo lugar (actual: {part.Lugar}): ");
             string nuevoLugar = Console.ReadLine();
@@ -500,37 +619,43 @@ using TorneoPOO_JAnchundia.Models;
 
             Console.Write($"Nueva asistencia (actual: {part.AsistenciaEspectadores}): ");
             string asistenciaInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(asistenciaInput)) part.AsistenciaEspectadores = Convert.ToInt32(asistenciaInput);
+            if (int.TryParse(asistenciaInput, out int nuevaAsistencia)) part.AsistenciaEspectadores = nuevaAsistencia;
 
             Console.Write($"Nueva duración en minutos (actual: {part.DuracionMinutos}): ");
             string duracionInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(duracionInput)) part.DuracionMinutos = Convert.ToInt32(duracionInput);
+            if (int.TryParse(duracionInput, out int nuevaDuracion)) part.DuracionMinutos = nuevaDuracion;
 
             Console.Write($"Nuevo estado (actual: {part.Estado}): ");
             string nuevoEstado = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(nuevoEstado)) part.Estado = nuevoEstado;
 
-            Console.WriteLine("\n¡Partido actualizado correctamente!");
+            context.SaveChanges();
+            Console.WriteLine("\n¡Partido actualizado correctamente en la base de datos!");
         }
         else
         {
-            Console.WriteLine("No se encontró ningún partido programado entre esos dos equipos.");
+            Console.WriteLine("No se encontró ningún partido registrado entre esos dos equipos.");
         }
-        Console.ReadLine();
     }
-    static void EliminarPartido()
-    {
-        Console.Clear();
-        Console.WriteLine("**********Eliminar Partido**********");
-        Console.WriteLine("Ingrese el nombre del equipo local del partido que desea eliminar: ");
-        string localBusqueda = Console.ReadLine();
-        Console.WriteLine("Ingrese el nombre del equipo visitante: ");
-        string visitanteBusqueda = Console.ReadLine();
+    Console.ReadLine();
+}
 
-        Partido part = Database.Partido.Find(p =>
-            p.Local.Nombre.ToUpper() == localBusqueda.ToUpper() &&
-            p.Visitante.Nombre.ToUpper() == visitanteBusqueda.ToUpper()
-        );
+void EliminarPartido()
+{
+    Console.Clear();
+    Console.WriteLine("**********Eliminar Partido**********");
+    Console.WriteLine("Ingrese el nombre del equipo local del partido: ");
+    string localBusqueda = Console.ReadLine();
+    Console.WriteLine("Ingrese el nombre del equipo visitante: ");
+    string visitanteBusqueda = Console.ReadLine();
+
+    using (var context = new TorneoDbContext())
+    {
+        Partido part = context.Partidos
+            .Include(p => p.Local)
+            .Include(p => p.Visitante)
+            .FirstOrDefault(p => p.Local.Nombre.ToUpper() == localBusqueda.ToUpper() &&
+                                 p.Visitante.Nombre.ToUpper() == visitanteBusqueda.ToUpper());
 
         if (part != null)
         {
@@ -540,8 +665,9 @@ using TorneoPOO_JAnchundia.Models;
             Console.WriteLine("¿Está seguro de que desea eliminar este partido? S/N: ");
             if (Console.ReadLine().ToUpper() == "S")
             {
-                Database.Partido.Remove(part);
-                Console.WriteLine("Partido eliminado exitosamente.");
+                context.Partidos.Remove(part);
+                context.SaveChanges();
+                Console.WriteLine("Partido eliminado exitosamente de la base de datos.");
             }
             else
             {
@@ -552,8 +678,9 @@ using TorneoPOO_JAnchundia.Models;
         {
             Console.WriteLine("Partido no encontrado.");
         }
-        Console.ReadLine();
     }
+    Console.ReadLine();
+}
 
 
 
@@ -565,18 +692,7 @@ using TorneoPOO_JAnchundia.Models;
 
 
 
-    
-    
-            
-                
 
-
-
-
-
-    
-    
-    
 
 
 
