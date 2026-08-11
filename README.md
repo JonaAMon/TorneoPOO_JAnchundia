@@ -30,3 +30,8 @@ Comportamientos de las clases
 
 2026-07-21
 	Inicio de archivos, serializador Json
+
+2026-08-11
+	Se ha realizado una migración completa de la persistencia de datos del sistema.
+	El proyecto Torneo ha dejado de utilizar almacenamiento local o temporal para pasar a integrarse con un Sistema de Gestión de Bases de Datos (SGBD) relacional (MySQL / SQL Server / PostgreSQL),
+	garantizando integridad referencial, persistencia de la información y mejor rendimiento.
